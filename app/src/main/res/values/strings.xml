@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Speaking Glasses</string>
     <string name="please_choose_language">Please choose your language</string>
-    <string name="error_tts_engine">Error: unable to load the TTS engine.</string>
+    <string name="take_photo_explanation">Please push the select button to take a photo.</string>
+    <string name="error_tts_engine">Unable to load the TTS engine.</string>
+    <string name="error_cannot_start_camera">Unable to start the camera.</string>
+    <string name="error_no_connectivity">Please connect your device to internet.</string>
 </resources>

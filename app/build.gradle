@@ -24,11 +24,11 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+
     compile 'com.android.support:appcompat-v7:23.2.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    testCompile 'junit:junit:4.12'
-
     compile 'com.reconinstruments.app:recon-application:4.4.0'
     compile 'com.reconinstruments.ui:recon-ui:4.4.0'
+    testCompile 'junit:junit:4.12'
     provided 'com.reconinstruments.os:recon-platform:4.4.0'
 }

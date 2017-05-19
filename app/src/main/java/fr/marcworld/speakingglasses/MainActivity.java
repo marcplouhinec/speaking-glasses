@@ -1,7 +1,7 @@
 package fr.marcworld.speakingglasses;
 
 import android.content.Context;
-import android.content.res.Resources;
+import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 
@@ -11,6 +11,7 @@ import com.reconinstruments.ui.list.StandardListItem;
 import java.util.Locale;
 
 import fr.marcworld.speakingglasses.enums.SupportedLanguage;
+import fr.marcworld.speakingglasses.utils.LocaleUtils;
 
 /**
  * Application entry-point. Allow a user to select a language.
@@ -18,6 +19,11 @@ import fr.marcworld.speakingglasses.enums.SupportedLanguage;
  * @author Marc Plouhinec
  */
 public class MainActivity extends SimpleListActivity {
+
+    static {
+        // Load the library that allow us to check the internet connectivity
+        System.load("/system/lib/libreconinstruments_jni.so");
+    }
 
     private TextToSpeech textToSpeech = null;
 
@@ -35,11 +41,11 @@ public class MainActivity extends SimpleListActivity {
                     setContents(new StandardListItem(getResources().getString(R.string.error_tts_engine)));
                 } else {
                     // Ask the user to choose a language
-                    setResourcesLocale(Locale.ENGLISH);
+                    LocaleUtils.setResourcesLocale(Locale.ENGLISH, MainActivity.this);
                     textToSpeech.setLanguage(Locale.ENGLISH);
                     textToSpeech.speak(getResources().getString(R.string.please_choose_language), TextToSpeech.QUEUE_ADD, null);
 
-                    setResourcesLocale(Locale.FRENCH);
+                    LocaleUtils.setResourcesLocale(Locale.FRENCH, MainActivity.this);
                     textToSpeech.setLanguage(Locale.FRENCH);
                     textToSpeech.speak(getResources().getString(R.string.please_choose_language), TextToSpeech.QUEUE_ADD, null);
 
@@ -57,12 +63,6 @@ public class MainActivity extends SimpleListActivity {
             textToSpeech.shutdown();
         }
         super.onDestroy();
-    }
-
-    private void setResourcesLocale(Locale locale) {
-        Resources resources = this.getResources();
-        resources.getConfiguration().locale = locale;
-        resources.updateConfiguration(resources.getConfiguration(), null);
     }
 
     /**
@@ -86,8 +86,10 @@ public class MainActivity extends SimpleListActivity {
 
         @Override
         public void onClick(Context context) {
-            setResourcesLocale(language.getLocale());
-            // TODO
+            textToSpeech.setLanguage(language.getLocale());
+            Intent intent = new Intent(MainActivity.this, CameraActivity.class);
+            intent.putExtra(SupportedLanguage.class.getSimpleName(), language.name());
+            startActivity(intent);
         }
     }
 
