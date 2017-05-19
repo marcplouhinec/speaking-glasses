@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.view.KeyEvent;
 import android.widget.Toast;
 
 import fr.marcworld.speakingglasses.enums.SupportedLanguage;
@@ -20,7 +21,8 @@ public class CameraActivity extends Activity {
     private Camera camera;
     private CameraPreview cameraPreview;
     private TextToSpeech textToSpeech = null;
-    private volatile boolean textToSpeechReady = false;
+    private boolean textToSpeechReady = false;
+    private boolean currentlyTakingPhoto = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +73,35 @@ public class CameraActivity extends Activity {
             textToSpeech.shutdown();
         }
         super.onDestroy();
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        // Take a picture when the user push the select button
+        if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
+            if (!currentlyTakingPhoto) {
+                currentlyTakingPhoto = true;
+
+                // Auto focus and take a photo
+                textToSpeech.speak(getResources().getString(R.string.auto_focus), TextToSpeech.QUEUE_ADD, null);
+                camera.autoFocus(new Camera.AutoFocusCallback() {
+                    @Override
+                    public void onAutoFocus(boolean success, Camera camera) {
+                        camera.takePicture(null, null, new Camera.PictureCallback() {
+                            @Override
+                            public void onPictureTaken(byte[] data, Camera camera) {
+                                currentlyTakingPhoto = false;
+                                textToSpeech.speak(getResources().getString(R.string.photo_taken), TextToSpeech.QUEUE_ADD, null);
+
+                                // Start analyzing the photo
+                                // TODO
+                            }
+                        });
+                    }
+                });
+            }
+        }
+        return super.onKeyUp(keyCode, event);
     }
 
     private void openCamera() {

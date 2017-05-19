@@ -2,6 +2,8 @@
     <string name="app_name">Speaking Glasses</string>
     <string name="please_choose_language">Veuillez choisir votre langue:</string>
     <string name="take_photo_explanation">Veuillez appuyer sur le bouton de sélection pour prendre une photo.</string>
+    <string name="auto_focus">Auto-focus</string>
+    <string name="photo_taken">Photo prise</string>
     <string name="error_tts_engine">Impossible de charger le moteur TTS.</string>
     <string name="error_cannot_start_camera">Impossible de démarrer la caméra.</string>
     <string name="error_no_connectivity">Veuillez connecter votre appareil à internet.</string>

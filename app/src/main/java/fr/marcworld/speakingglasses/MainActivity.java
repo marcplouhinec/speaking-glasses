@@ -26,7 +26,7 @@ public class MainActivity extends SimpleListActivity {
     }
 
     private TextToSpeech textToSpeech = null;
-    private volatile boolean textToSpeechReady = false;
+    private boolean textToSpeechReady = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
