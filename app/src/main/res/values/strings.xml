@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Speaking Glasses</string>
+    <string name="please_choose_language">Please choose your language</string>
+    <string name="error_tts_engine">Error: unable to load the TTS engine.</string>
 </resources>

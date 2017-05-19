@@ -1,6 +1,7 @@
 package fr.marcworld.speakingglasses;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 
@@ -12,14 +13,13 @@ import java.util.Locale;
 import fr.marcworld.speakingglasses.enums.SupportedLanguage;
 
 /**
- * Application entry-point.
+ * Application entry-point. Allow a user to select a language.
  *
  * @author Marc Plouhinec
  */
 public class MainActivity extends SimpleListActivity {
 
     private TextToSpeech textToSpeech = null;
-    private SupportedLanguage selectedLanguage = SupportedLanguage.ENGLISH;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,13 +32,16 @@ public class MainActivity extends SimpleListActivity {
             public void onInit(int status) {
                 if (status == TextToSpeech.ERROR) {
                     // Display an error message
-                    setContents(new StandardListItem("Error: unable to load the TTS engine."));
+                    setContents(new StandardListItem(getResources().getString(R.string.error_tts_engine)));
                 } else {
                     // Ask the user to choose a language
+                    setResourcesLocale(Locale.ENGLISH);
                     textToSpeech.setLanguage(Locale.ENGLISH);
-                    textToSpeech.speak("Please choose your language:", TextToSpeech.QUEUE_ADD, null);
+                    textToSpeech.speak(getResources().getString(R.string.please_choose_language), TextToSpeech.QUEUE_ADD, null);
+
+                    setResourcesLocale(Locale.FRENCH);
                     textToSpeech.setLanguage(Locale.FRENCH);
-                    textToSpeech.speak("Veuillez choisir votre langue:", TextToSpeech.QUEUE_ADD, null);
+                    textToSpeech.speak(getResources().getString(R.string.please_choose_language), TextToSpeech.QUEUE_ADD, null);
 
                     // Show a list of languages the user must select
                     setContents(new LanguageListItem(SupportedLanguage.ENGLISH), new LanguageListItem(SupportedLanguage.FRENCH));
@@ -54,6 +57,12 @@ public class MainActivity extends SimpleListActivity {
             textToSpeech.shutdown();
         }
         super.onDestroy();
+    }
+
+    private void setResourcesLocale(Locale locale) {
+        Resources resources = this.getResources();
+        resources.getConfiguration().locale = locale;
+        resources.updateConfiguration(resources.getConfiguration(), null);
     }
 
     /**
@@ -77,7 +86,7 @@ public class MainActivity extends SimpleListActivity {
 
         @Override
         public void onClick(Context context) {
-            MainActivity.this.selectedLanguage = language;
+            setResourcesLocale(language.getLocale());
             // TODO
         }
     }

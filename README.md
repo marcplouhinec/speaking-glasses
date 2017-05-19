@@ -1,4 +1,4 @@
-# speaking-glasses
+# Speaking Glasses
 
 ## Introduction
 This application targets the [Recon Jet smart glasses](https://www.reconinstruments.com/products/jet/), running Android OS.
