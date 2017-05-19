@@ -26,6 +26,7 @@ public class MainActivity extends SimpleListActivity {
     }
 
     private TextToSpeech textToSpeech = null;
+    private volatile boolean textToSpeechReady = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,14 +41,10 @@ public class MainActivity extends SimpleListActivity {
                     // Display an error message
                     setContents(new StandardListItem(getResources().getString(R.string.error_tts_engine)));
                 } else {
-                    // Ask the user to choose a language
-                    LocaleUtils.setResourcesLocale(Locale.ENGLISH, MainActivity.this);
-                    textToSpeech.setLanguage(Locale.ENGLISH);
-                    textToSpeech.speak(getResources().getString(R.string.please_choose_language), TextToSpeech.QUEUE_ADD, null);
+                    textToSpeechReady = true;
 
-                    LocaleUtils.setResourcesLocale(Locale.FRENCH, MainActivity.this);
-                    textToSpeech.setLanguage(Locale.FRENCH);
-                    textToSpeech.speak(getResources().getString(R.string.please_choose_language), TextToSpeech.QUEUE_ADD, null);
+                    // Ask the user to choose a language
+                    askUserToChooseALanguage();
 
                     // Show a list of languages the user must select
                     setContents(new LanguageListItem(SupportedLanguage.ENGLISH), new LanguageListItem(SupportedLanguage.FRENCH));
@@ -57,12 +54,30 @@ public class MainActivity extends SimpleListActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        if (textToSpeechReady) {
+            askUserToChooseALanguage();
+        }
+    }
+
+    @Override
     protected void onDestroy() {
         if (textToSpeech != null) {
             textToSpeech.stop();
             textToSpeech.shutdown();
         }
         super.onDestroy();
+    }
+
+    private void askUserToChooseALanguage() {
+        LocaleUtils.setResourcesLocale(Locale.ENGLISH, MainActivity.this);
+        textToSpeech.setLanguage(Locale.ENGLISH);
+        textToSpeech.speak(getResources().getString(R.string.please_choose_language), TextToSpeech.QUEUE_ADD, null);
+
+        LocaleUtils.setResourcesLocale(Locale.FRENCH, MainActivity.this);
+        textToSpeech.setLanguage(Locale.FRENCH);
+        textToSpeech.speak(getResources().getString(R.string.please_choose_language), TextToSpeech.QUEUE_ADD, null);
     }
 
     /**

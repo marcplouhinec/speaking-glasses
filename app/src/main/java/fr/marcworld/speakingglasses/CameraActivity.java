@@ -41,9 +41,9 @@ public class CameraActivity extends Activity {
                 if (status == TextToSpeech.ERROR) {
                     Toast.makeText(CameraActivity.this, R.string.error_tts_engine, Toast.LENGTH_SHORT).show();
                 } else {
+                    textToSpeechReady = true;
                     textToSpeech.setLanguage(language.getLocale());
                     textToSpeech.speak(getResources().getString(R.string.take_photo_explanation), TextToSpeech.QUEUE_ADD, null);
-                    textToSpeechReady = true;
                     openCamera();
                 }
             }
