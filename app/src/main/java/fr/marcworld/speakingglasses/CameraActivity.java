@@ -1,6 +1,7 @@
 package fr.marcworld.speakingglasses;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
@@ -18,6 +19,7 @@ import fr.marcworld.speakingglasses.views.CameraPreview;
  */
 public class CameraActivity extends Activity {
 
+    private SupportedLanguage language = SupportedLanguage.ENGLISH;
     private Camera camera;
     private CameraPreview cameraPreview;
     private TextToSpeech textToSpeech = null;
@@ -28,7 +30,7 @@ public class CameraActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         // Set the resources locale
         String languageExtra = getIntent().getStringExtra(SupportedLanguage.class.getSimpleName());
-        final SupportedLanguage language = languageExtra == null ? SupportedLanguage.ENGLISH : SupportedLanguage.valueOf(languageExtra);
+        language = languageExtra == null ? SupportedLanguage.ENGLISH : SupportedLanguage.valueOf(languageExtra);
         LocaleUtils.setResourcesLocale(language.getLocale(), this);
 
         // Initialize the activity content
@@ -45,7 +47,7 @@ public class CameraActivity extends Activity {
                 } else {
                     textToSpeechReady = true;
                     textToSpeech.setLanguage(language.getLocale());
-                    textToSpeech.speak(getResources().getString(R.string.take_photo_explanation), TextToSpeech.QUEUE_ADD, null);
+                    askUserToTakePhoto();
                     openCamera();
                 }
             }
@@ -56,6 +58,7 @@ public class CameraActivity extends Activity {
     protected void onResume() {
         super.onResume();
         if (textToSpeechReady) {
+            askUserToTakePhoto();
             openCamera();
         }
     }
@@ -94,7 +97,10 @@ public class CameraActivity extends Activity {
                                 textToSpeech.speak(getResources().getString(R.string.photo_taken), TextToSpeech.QUEUE_ADD, null);
 
                                 // Start analyzing the photo
-                                // TODO
+                                Intent intent = new Intent(CameraActivity.this, PhotoAnalysisActivity.class);
+                                intent.putExtra(SupportedLanguage.class.getSimpleName(), language.name());
+                                intent.putExtra(PhotoAnalysisActivity.INTENT_PHOTO_EXTRA, data);
+                                startActivity(intent);
                             }
                         });
                     }
@@ -102,6 +108,10 @@ public class CameraActivity extends Activity {
             }
         }
         return super.onKeyUp(keyCode, event);
+    }
+
+    private void askUserToTakePhoto() {
+        textToSpeech.speak(getResources().getString(R.string.take_photo_explanation), TextToSpeech.QUEUE_ADD, null);
     }
 
     private void openCamera() {

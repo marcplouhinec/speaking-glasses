@@ -19,6 +19,7 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -26,6 +27,8 @@
 
         <uses-library android:name="com.reconinstruments.os" />
         <uses-library android:name="com.reconinstruments.lib" />
+
+        <activity android:name=".PhotoAnalysisActivity"></activity>
     </application>
 
 </manifest>

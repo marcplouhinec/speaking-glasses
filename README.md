@@ -7,7 +7,7 @@ The goal is to help a visually impaired user to get a better idea of what is in 
 Technically, the application works by taking a photo of the scene in front of the user, send it to [Cloud Sight API](https://cloudsight.ai/)
 and using Text-to-Speech technologies to describe the scene.
 
-## Build and installation
+## Preparation and build
 The first step is to download the SDK from the [Intel Developer Zone](https://software.intel.com/en-us/recon).
 Please follow this documentation in order to setup [adb](https://developer.android.com/studio/command-line/adb.html).
 
