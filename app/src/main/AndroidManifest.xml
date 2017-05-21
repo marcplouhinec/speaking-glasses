@@ -16,6 +16,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/ReconTheme">
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,11 +25,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".CameraActivity" />
+        <activity android:name=".PhotoAnalysisActivity" />
 
         <uses-library android:name="com.reconinstruments.os" />
         <uses-library android:name="com.reconinstruments.lib" />
 
-        <activity android:name=".PhotoAnalysisActivity"></activity>
     </application>
 
 </manifest>

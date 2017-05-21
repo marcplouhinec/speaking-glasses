@@ -9,17 +9,19 @@ import java.util.Locale;
  */
 public enum SupportedLanguage {
 
-    ENGLISH(Locale.ENGLISH, "English", "en"),
-    FRENCH(Locale.FRENCH, "Français", "fr");
+    ENGLISH(Locale.ENGLISH, "English", "en-US", "en"),
+    FRENCH(Locale.FRENCH, "Français", "fr-FR", "fr");
 
     private final Locale locale;
     private final String label;
     private final String tag;
+    private final String isoCode;
 
-    SupportedLanguage(Locale locale, String label, String tag) {
+    SupportedLanguage(Locale locale, String label, String tag, String isoCode) {
         this.locale = locale;
         this.label = label;
         this.tag = tag;
+        this.isoCode = isoCode;
     }
 
     public Locale getLocale() {
@@ -32,5 +34,9 @@ public enum SupportedLanguage {
 
     public String getTag() {
         return tag;
+    }
+
+    public String getIsoCode() {
+        return isoCode;
     }
 }

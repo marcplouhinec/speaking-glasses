@@ -6,12 +6,10 @@ import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 
 import com.reconinstruments.ui.list.SimpleListActivity;
+import com.reconinstruments.ui.list.SimpleListItem;
 import com.reconinstruments.ui.list.StandardListItem;
 
-import java.util.Locale;
-
 import fr.marcworld.speakingglasses.enums.SupportedLanguage;
-import fr.marcworld.speakingglasses.utils.LocaleUtils;
 
 /**
  * Application entry-point. Allow a user to select a language.
@@ -47,7 +45,12 @@ public class MainActivity extends SimpleListActivity {
                     askUserToChooseALanguage();
 
                     // Show a list of languages the user must select
-                    setContents(new LanguageListItem(SupportedLanguage.ENGLISH), new LanguageListItem(SupportedLanguage.FRENCH));
+                    SupportedLanguage[] supportedLanguages = SupportedLanguage.values();
+                    SimpleListItem[] listItems = new SimpleListItem[supportedLanguages.length];
+                    for (int i = 0; i < supportedLanguages.length; i++) {
+                        listItems[i] = new LanguageListItem(supportedLanguages[i]);
+                    }
+                    setContents(listItems);
                 }
             }
         });
@@ -71,12 +74,7 @@ public class MainActivity extends SimpleListActivity {
     }
 
     private void askUserToChooseALanguage() {
-        LocaleUtils.setResourcesLocale(Locale.ENGLISH, MainActivity.this);
-        textToSpeech.setLanguage(Locale.ENGLISH);
-        textToSpeech.speak(getResources().getString(R.string.please_choose_language), TextToSpeech.QUEUE_ADD, null);
-
-        LocaleUtils.setResourcesLocale(Locale.FRENCH, MainActivity.this);
-        textToSpeech.setLanguage(Locale.FRENCH);
+        textToSpeech.setLanguage(this.getResources().getConfiguration().locale);
         textToSpeech.speak(getResources().getString(R.string.please_choose_language), TextToSpeech.QUEUE_ADD, null);
     }
 

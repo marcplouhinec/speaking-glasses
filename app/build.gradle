@@ -17,6 +17,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+    }
 }
 
 dependencies {
@@ -31,4 +34,5 @@ dependencies {
     compile 'com.reconinstruments.ui:recon-ui:4.4.0'
     testCompile 'junit:junit:4.12'
     provided 'com.reconinstruments.os:recon-platform:4.4.0'
+    compile group: 'commons-io', name: 'commons-io', version: '2.5'
 }

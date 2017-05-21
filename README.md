@@ -4,7 +4,7 @@
 This application targets the [Recon Jet smart glasses](https://www.reconinstruments.com/products/jet/), running Android OS.
 The goal is to help a visually impaired user to get a better idea of what is in front of him.
 
-Technically, the application works by taking a photo of the scene in front of the user, send it to [Cloud Sight API](https://cloudsight.ai/)
+Technically, the application works by taking a photo of the scene in front of the user, send it to [Cloud Sight](https://cloudsight.ai/)
 and using Text-to-Speech technologies to describe the scene.
 
 ## Preparation and build
@@ -27,3 +27,6 @@ If not you may need to find an APK on a website like [http://www.apkmirror.com](
 
 The application currently works in english and french.
 
+The third step is to subscribe to [Cloud Sight](https://cloudsight.ai/) and create a project with a "Whole Image" response type.
+If it is your first project, this website will give you some free credits for starting.
+You will then receive an *API Key* that you need to copy in the file `/app/src/main/assets/application.properties`.
