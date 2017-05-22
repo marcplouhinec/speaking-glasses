@@ -8,4 +8,5 @@
     <string name="error_tts_engine">Impossible de charger le moteur TTS.</string>
     <string name="error_cannot_start_camera">Impossible de démarrer la caméra.</string>
     <string name="error_no_connectivity">Veuillez connecter votre appareil à internet.</string>
+    <string name="error_analysis_failed">Impossible d\'analyser l\'image. Veuillez réessayer plus tard.</string>
 </resources>
