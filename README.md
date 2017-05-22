@@ -1,7 +1,7 @@
 # Speaking Glasses
 
 ## Introduction
-This application targets the [Recon Jet smart glasses](https://www.reconinstruments.com/products/jet/) that run Android OS.
+This application targets the [Recon Jet smart glasses](https://www.reconinstruments.com/products/jet/) that runs Android OS.
 The goal is to help a visually impaired user to get a better idea of what is in front of him.
 
 Technically, the application works by taking a photo of the scene in front of the user, send it to [Cloud Sight](https://cloudsight.ai/)
