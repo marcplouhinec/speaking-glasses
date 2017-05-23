@@ -1,5 +1,7 @@
 # Speaking Glasses
 
+[![Demo Video](https://img.youtube.com/vi/bGrgviXpvKw/0.jpg)](https://www.youtube.com/watch?v=bGrgviXpvKw)
+
 ## Introduction
 This application targets the [Recon Jet smart glasses](https://www.reconinstruments.com/products/jet/) that runs Android OS.
 The goal is to help a visually impaired user to get a better idea of what is in front of him.
