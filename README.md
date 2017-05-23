@@ -1,13 +1,14 @@
 # Speaking Glasses
 
-[![Demo Video](https://img.youtube.com/vi/bGrgviXpvKw/0.jpg)](https://www.youtube.com/watch?v=bGrgviXpvKw)
-
 ## Introduction
 This application targets the [Recon Jet smart glasses](https://www.reconinstruments.com/products/jet/) that runs Android OS.
-The goal is to help a visually impaired user to get a better idea of what is in front of him.
+The goal is to help visually impaired people to get a better idea of what is in front of them.
 
 Technically, the application works by taking a photo of the scene in front of the user, send it to [Cloud Sight](https://cloudsight.ai/)
-and using Text-to-Speech technologies to describe the scene.
+and using Text-to-Speech technology to describe the scene.
+
+Here is a demo video of the application:
+[![Demo Video](https://img.youtube.com/vi/bGrgviXpvKw/0.jpg)](https://www.youtube.com/watch?v=bGrgviXpvKw)
 
 ## Preparation and build
 The first step is to download the SDK from the [Intel Developer Zone](https://software.intel.com/en-us/recon).
