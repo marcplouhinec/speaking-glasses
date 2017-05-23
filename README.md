@@ -8,6 +8,7 @@ Technically, the application works by taking a photo of the scene in front of th
 and using Text-to-Speech technology to describe the scene.
 
 Here is a demo video of the application:
+
 [![Demo Video](https://img.youtube.com/vi/bGrgviXpvKw/0.jpg)](https://www.youtube.com/watch?v=bGrgviXpvKw)
 
 ## Preparation and build
